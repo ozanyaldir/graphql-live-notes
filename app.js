@@ -7,12 +7,19 @@ const mongoose = require("mongoose");
 
 require("dotenv").config();
 
+const User = require('./models/User');
+const Note = require('./models/Note');
+
 async function startApolloServer(typeDefs, resolvers) {
   const app = express();
   const httpServer = http.createServer(app);
   const server = new ApolloServer({
     typeDefs,
     resolvers,
+    context: {
+      User,
+      Note
+    },
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   });
 
@@ -29,5 +36,5 @@ mongoose.connect(process.env.DB_URI)
     console.log(err.message)
   })
 const resolvers = require("./graphql/resolvers");
-const typeDefs = fs.readFileSync("./graphql/types/schema.graphql").toString("utf-8");
+const typeDefs = fs.readFileSync("./graphql/schema.graphql").toString("utf-8");
 startApolloServer(typeDefs, resolvers);

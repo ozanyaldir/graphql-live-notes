@@ -1,0 +1,32 @@
+type Query{
+    user(id: ID!): User
+    users: [User!]!
+    note(id: ID!): Note
+    notes: [Note!]!
+}
+
+type User{
+    username: String!
+    createdAt: String!
+}
+
+type Mutation{
+    createUser(data: CreateUserInput!): User!
+    createNote(data: CreateNoteInput!): Note!
+}
+
+input CreateUserInput{
+    username: String!
+    password: String!
+}
+
+
+type Note{
+    text: String!
+    createdAt: String!
+}
+
+input CreateNoteInput{
+    text: String!
+    user_id: ID!
+}
