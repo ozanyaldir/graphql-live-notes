@@ -1,0 +1,14 @@
+{
+  "name": "grahql-live-notes",
+  "version": "0.0.1",
+  "description": "Live public notes api using GraphQL over Express",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm start"
+  },
+  "keywords": [
+    "graphql"
+  ],
+  "author": "ozanyaldir",
+  "license": "ISC"
+}
