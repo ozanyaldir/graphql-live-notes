@@ -4,11 +4,20 @@
   "description": "Live public notes api using GraphQL over Express",
   "main": "index.js",
   "scripts": {
-    "test": "npm start"
+    "start:dev": "nodemon --ext js,graphql app.js"
   },
   "keywords": [
     "graphql"
   ],
   "author": "ozanyaldir",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server-core": "^3.4.0",
+    "apollo-server-express": "^3.4.0",
+    "bcrypt": "^5.0.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "graphql": "^15.6.1",
+    "mongoose": "^6.0.11"
+  }
 }
