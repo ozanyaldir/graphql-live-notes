@@ -8,6 +8,7 @@ type Query{
 type User{
     username: String!
     createdAt: String!
+    notes: [Note!]!
 }
 
 type Mutation{
@@ -20,10 +21,10 @@ input CreateUserInput{
     password: String!
 }
 
-
 type Note{
     text: String!
     createdAt: String!
+    user: User!
 }
 
 input CreateNoteInput{
