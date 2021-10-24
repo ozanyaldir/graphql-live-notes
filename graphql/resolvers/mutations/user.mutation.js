@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const jwtHelper = require('../../helpers/jwt')
 
 module.exports = {
     signIn: async (parent, { data: { username, password } }, { User }) => {
@@ -11,18 +12,22 @@ module.exports = {
             throw new Error('Invalid password!')
 
         return {
-            token: user.username,
-            createdAt: user.createdAt
+            token: jwtHelper.generate(user, '1h')
         }
     },
-    createUser: async (parent, { data: { username, password } }, { User }) => {
+    signUp: async (parent, { data: { username, password } }, { User }) => {
         const user = await User.findOne({ username: username })
         if (user)
             throw new Error('User already exists!')
-        return await new User({
+
+        const newUser = await new User({
             username: username,
             password: password
         }).save()
+
+        return {
+            token: jwtHelper.generate(newUser, '1h')
+        }
     },
 
 }

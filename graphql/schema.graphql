@@ -7,13 +7,12 @@ type Query{
 
 type Mutation{
     signIn(data: SignInInput!): Token!
-    createUser(data: CreateUserInput!): User!
+    signUp(data: SignUpInput!): Token!
     createNote(data: CreateNoteInput!): Note!
 }
 
 type Token{
     token: String!
-    createdAt: String!
 }
 
 input SignInInput{
@@ -27,7 +26,7 @@ type User{
     notes: [Note!]!
 }
 
-input CreateUserInput{
+input SignUpInput{
     username: String!
     password: String!
 }
