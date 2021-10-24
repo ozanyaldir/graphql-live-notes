@@ -5,15 +5,26 @@ type Query{
     notes: [Note!]!
 }
 
+type Mutation{
+    signIn(data: SignInInput!): Token!
+    createUser(data: CreateUserInput!): User!
+    createNote(data: CreateNoteInput!): Note!
+}
+
+type Token{
+    token: String!
+    createdAt: String!
+}
+
+input SignInInput{
+    username: String!
+    password: String!
+}
+
 type User{
     username: String!
     createdAt: String!
     notes: [Note!]!
-}
-
-type Mutation{
-    createUser(data: CreateUserInput!): User!
-    createNote(data: CreateNoteInput!): Note!
 }
 
 input CreateUserInput{
