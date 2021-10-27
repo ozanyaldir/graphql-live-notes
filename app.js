@@ -15,7 +15,7 @@ require("dotenv").config();
 
 const schema = require('./graphql/schema.js')
 const pubsub = new PubSub();
-const graphQLServerPort = process.env.GRAPHQL_SERVER_PORT
+const graphQLServerPort = process.env.PORT
 
 // Mongoose models
 const User = require('./models/User');
