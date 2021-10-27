@@ -69,6 +69,7 @@ async function startApolloServer(schema) {
       jwtPayload: req.jwtPayload,
       pubsub
     }),
+    introspection: true,
     plugins: [
       ApolloServerPluginDrainHttpServer({ httpServer }),
       {
