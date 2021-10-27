@@ -80,7 +80,8 @@ async function startApolloServer(schema) {
             }
           };
         }
-      }
+      },
+      ApolloServerPluginLandingPageLocalDefault({ footer: true })
     ],
   });
 
