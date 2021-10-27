@@ -1,4 +1,13 @@
 module.exports = {
+    me: async (parent, args, { User, jwtPayload }) => {
+        if (!jwtPayload)
+            throw new Error('Invalid token!')
+        const user = await User.findOne({ username: jwtPayload.username })
+        if (!user)
+            throw new Error('User not found!')
+
+        return user
+    },
     user: async (parent, args, { User }) => {
         return await User.findById(args.id);
     },

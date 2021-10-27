@@ -12,7 +12,7 @@ module.exports = {
             throw new Error('Invalid password!')
 
         return {
-            token: jwtHelper.generate(user, '1h')
+            token: jwtHelper.generate(user, '1d')
         }
     },
     signUp: async (parent, { data: { username, password } }, { User }) => {
@@ -26,7 +26,7 @@ module.exports = {
         }).save()
 
         return {
-            token: jwtHelper.generate(newUser, '1h')
+            token: jwtHelper.generate(newUser, '1d')
         }
     },
 

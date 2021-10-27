@@ -1,4 +1,5 @@
 type Query{
+    me: User
     user(id: ID!): User
     users: [User!]!
     note(id: ID!): Note
@@ -9,6 +10,10 @@ type Mutation{
     signIn(data: SignInInput!): Token!
     signUp(data: SignUpInput!): Token!
     createNote(data: CreateNoteInput!): Note!
+}
+
+type Subscription{
+    note(user_id: ID): Note
 }
 
 type Token{
@@ -39,5 +44,4 @@ type Note{
 
 input CreateNoteInput{
     text: String!
-    user_id: ID!
 }
