@@ -1,26 +1,27 @@
-const { ApolloServer, gql } = require("apollo-server-express");
-const { ApolloServerPluginDrainHttpServer } = require("apollo-server-core");
+
 const express = require("express");
 const http = require("http");
-const fs = require("fs");
 const mongoose = require("mongoose");
 const jwt = require('jsonwebtoken');
 
+// GraphQL
+const { ApolloServer } = require("apollo-server-express");
+const { ApolloServerPluginDrainHttpServer } = require("apollo-server-core");
 const { execute, subscribe } = require('graphql');
 const { SubscriptionServer } = require('subscriptions-transport-ws');
-const { makeExecutableSchema } = require('@graphql-tools/schema');
-
 const { PubSub } = require('graphql-subscriptions');
-const pubsub = new PubSub();
 
 require("dotenv").config();
 
+const schema = require('./graphql/schema.js')
+const pubsub = new PubSub();
 const graphQLServerPort = process.env.GRAPHQL_SERVER_PORT
 
+// Mongoose models
 const User = require('./models/User');
 const Note = require('./models/Note');
 
-async function startApolloServer(typeDefs, resolvers) {
+async function startApolloServer(schema) {
   const app = express();
   app.use(async (req, res, next) => {
     const token = req.headers['authorization'];
@@ -33,11 +34,9 @@ async function startApolloServer(typeDefs, resolvers) {
     }
     next();
   })
+
+
   const httpServer = http.createServer(app);
-
-
-
-  const schema = makeExecutableSchema({ typeDefs, resolvers, });
   const subscriptionServer = SubscriptionServer.create({
     schema,
     async onConnect(connectionParams, webSocket, context) {
@@ -58,9 +57,7 @@ async function startApolloServer(typeDefs, resolvers) {
     execute,
     subscribe,
   }, {
-    // This is the `httpServer` we created in a previous step.
     server: httpServer,
-    // This `server` is the instance returned from `new ApolloServer`.
     path: httpServer.graphqlPath,
   });
 
@@ -101,6 +98,4 @@ mongoose.connect(process.env.DB_URI)
   .catch(err => {
     console.log(err.message)
   })
-const resolvers = require("./graphql/resolvers");
-const typeDefs = fs.readFileSync("./graphql/schema.graphql").toString("utf-8");
-startApolloServer(typeDefs, resolvers);
+startApolloServer(schema);
