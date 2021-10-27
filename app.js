@@ -6,7 +6,12 @@ const jwt = require('jsonwebtoken');
 
 // GraphQL
 const { ApolloServer } = require("apollo-server-express");
-const { ApolloServerPluginDrainHttpServer } = require("apollo-server-core");
+const {
+  ApolloServerPluginDrainHttpServer,
+  ApolloServerPluginLandingPageLocalDefault,
+  ApolloServerPluginLandingPageProductionDefault
+} = require("apollo-server-core");
+
 const { execute, subscribe } = require('graphql');
 const { SubscriptionServer } = require('subscriptions-transport-ws');
 const { PubSub } = require('graphql-subscriptions');
