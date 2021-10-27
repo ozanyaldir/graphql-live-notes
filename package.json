@@ -4,7 +4,8 @@
   "description": "Live public notes api using GraphQL over Express",
   "main": "index.js",
   "scripts": {
-    "start:dev": "nodemon --ext js,graphql app.js"
+    "start:dev": "nodemon --ext js,graphql app.js",
+    "start": "node app.js"
   },
   "keywords": [
     "graphql"
