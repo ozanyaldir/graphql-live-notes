@@ -1,7 +1,13 @@
-const Query = require('./queries/index')
-const Mutation = require('./mutations/index')
+const Query = require('./queries/Query')
+const Note = require('./queries/Note.js');
+const User = require('./queries/User.js');
+const Mutation = require('./mutations')
+const Subscription = require('./subscriptions')
 
 module.exports = {
     Query,
-    Mutation
+    Note,
+    User,
+    Mutation,
+    Subscription,
 }
