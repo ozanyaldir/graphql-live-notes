@@ -1,5 +1,6 @@
 module.exports = `
     type User{
+        id: ID!
         username: String!
         createdAt: String!
         notes: [Note!]!
